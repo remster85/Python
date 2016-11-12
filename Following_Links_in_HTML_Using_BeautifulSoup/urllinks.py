@@ -5,25 +5,27 @@
 import urllib
 from BeautifulSoup import *
 
+maxIterations = 0
 
-def gotolink(url, position, currentIteration, maxIterations): #program does nothing as written
+def gotolink(url, urlPosition, currentIteration):
     html = urllib.urlopen(url).read()
     soup = BeautifulSoup(html)
 
     # Retrieve all of the anchor tags
     tags = soup('a')
-    times = 0
+    urlNumber = 0
     for tag in tags:
         url =  tag.get('href', None)
-        times = times + 1
+        urlNumber = urlNumber + 1
         if currentIteration == maxIterations:
             break
-        if times == position:
+        if urlNumber == urlPosition:
             print url
-            gotolink(url, position, currentIteration+1, maxIterations)
+            gotolink(url, urlPosition, currentIteration+1)
             break
 
 
+maxIterations = 7
 url = 'http://python-data.dr-chuck.net/known_by_Avah.html'
-gotolink(url,18,0,7)
+gotolink(url,18,0)
 
