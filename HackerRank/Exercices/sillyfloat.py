@@ -1,14 +1,3 @@
 import re
-numberofcases = int(input())
-i = 0
-while i < numberofcases:
-    n = input()
-    try:
-        float(n)
-        if not '.' in str(n):
-            print("False")
-        else:
-            print("True")
-    except:
-        print("False")
-    i = i + 1
+for _ in range(int(input())):
+	print(bool(re.match(r'^[-+]?[0-9]*\.[0-9]+$', input())))
