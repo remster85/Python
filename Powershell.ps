@@ -1,0 +1,34 @@
+# Set the root directory where you want to search
+$rootDirectory = "C:\Path\To\Root\Directory"
+
+# Define the date range
+$startDate = Get-Date "20240101"
+$endDate = Get-Date "20240624"
+
+# Function to check if a string represents a valid date in YYYYMMDD format
+function IsValidDate($strDate) {
+    [DateTime]::TryParseExact($strDate, "yyyyMMdd", [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$null)
+}
+
+# Get all subdirectories in the root directory
+$subDirectories = Get-ChildItem -Path $rootDirectory -Directory | Where-Object { 
+    IsValidDate($_.Name) -and $_.Name -ge $startDate.ToString("yyyyMMdd") -and $_.Name -le $endDate.ToString("yyyyMMdd")
+}
+
+# Array to store results
+$results = @()
+
+# Loop through each valid subdirectory
+foreach ($subDir in $subDirectories) {
+    # Construct the pattern for files starting with "SR_SUB" and ending with ".txt"
+    $pattern = Join-Path -Path $subDir.FullName -ChildPath "SR_SUB*.txt"
+    
+    # Get files matching the pattern
+    $files = Get-ChildItem -Path $pattern -File
+    
+    # Add matching files to results array
+    $results += $files
+}
+
+# Output the results
+$results
