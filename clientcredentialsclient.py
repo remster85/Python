@@ -43,3 +43,17 @@ class ClientCredentialsClient:
         headers = kwargs.pop("headers", {})
         headers["Authorization"] = f"Bearer {self.get_token()}"
         return requests.post(url, data=data, json=json, headers=headers, **kwargs)
+
+from my_oauth_client.client_credentials import ClientCredentialsClient
+
+client = ClientCredentialsClient(
+    token_url="https://auth.example.com/oauth2/token",
+    client_id="your_client_id",
+    client_secret="your_client_secret",
+    scope="read write"
+)
+
+# Make an authenticated GET request
+response = client.get("https://api.example.com/protected/resource")
+print(response.json())
+
