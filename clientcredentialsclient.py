@@ -10,15 +10,19 @@ class ClientCredentialsClient:
         self._token = None
         self._token_expiry = 0
 
-    def _fetch_token(self):
+    def _fetch_token(self, **kwargs):
         data = {
             "grant_type": "client_credentials"
         }
         if self.scope:
             data["scope"] = self.scope
 
+        headers = kwargs.pop("headers", {})
+        headers["Content-Type"] = "application/x-www-form-urlencoded"
+
         response = requests.post(
             self.token_url,
+            headers = headers
             data=data,
             auth=(self.client_id, self.client_secret),
             timeout=10
