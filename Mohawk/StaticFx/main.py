@@ -15,6 +15,7 @@ from datetime import date
 
 
 def run(rows):
+    print("Hello FX retrieval of the day")
     if rows is None:
         # First stage in the chain — fabricate some rows so you can see
         # something end-to-end without wiring up a database yet.
