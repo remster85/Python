@@ -19,7 +19,7 @@ def run(rows):
         # First stage in the chain — fabricate some rows so you can see
         # something end-to-end without wiring up a database yet.
         return [
-            {"ccy": "EUR", "rate": 1.28},
+            {"ccy": "EUR", "rate": 1.01},
             {"ccy": "GBP", "rate": 1.37},
             {"ccy": "JPY", "rate": 0.0077},
         ]
