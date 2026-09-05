@@ -19,9 +19,9 @@ def run(rows):
         # First stage in the chain — fabricate some rows so you can see
         # something end-to-end without wiring up a database yet.
         return [
-            {"ccy": "EUR", "rate": 1.08},
-            {"ccy": "GBP", "rate": 1.27},
-            {"ccy": "JPY", "rate": 0.0067},
+            {"ccy": "EUR", "rate": 1.18},
+            {"ccy": "GBP", "rate": 1.37},
+            {"ccy": "JPY", "rate": 0.0077},
         ]
 
     # Middle/last stage — do something with what came before it.
